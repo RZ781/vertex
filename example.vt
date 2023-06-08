@@ -1,0 +1,29 @@
+// all statements are expressions
+let x = 5;
+if (x == 5) { // block
+    x += 1;
+    5; // last expr is returned
+} else if (false) {}
+
+func test(n) {
+    let ret = 0;
+    while (n > 0) {
+        n -= 1;
+        ret += 2;
+    }
+    return ret;
+}
+
+
+// conditionals: if/else
+// exceptions: try/catch/finally/raise
+// loops: for/while/break/continue/do while
+// functions: func/return/yield/async/await/f()
+// maths: + - / * ** // @ %
+// logic: & | ~ !
+// variables: del = := +=
+// comparison: == >= <= > < !=
+// literals: 0 "" f"" b"" true false
+// collections: [] () {} [for in] list[i]
+// class
+// import

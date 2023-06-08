@@ -1,0 +1,1 @@
+gcc c/*.c -o vertex -I include -Wall -Werror -Wextra
