@@ -1,16 +1,21 @@
-import parser
+import os
+files = ["main", "lexer", "parser", "data", "parselib", "ir"]
+includes = ["lexer", "parser", "debug", "parselib", "ir"]
 
-with open("example.hy") as f:
-    text = f.read()
-def pprint(x, level=0):
-    l = level * "|"
-    try:
-        x[0]
-        if type(x) == str:
-            raise TypeError
-        for c in x:
-            pprint(c, level+1)
-    except:
-        print(l + str(x))
-
-pprint(parser.parse(parser.lex(text)))
+code = ""
+for file in files:
+    with open(f"c/{file}.c") as f:
+        code += f.read()
+for file in includes:
+    with open(f"include/{file}.h") as f:
+        code += f.read()
+hash1 = str(hash(code))
+with open("hash") as f:
+    hash2 = f.read()
+    
+if hash1 != hash2:
+    print("building...")
+    with open("hash", "w") as f:
+        f.write(hash1)
+    os.system("./build.sh")
+os.system("./vertex")

@@ -16,10 +16,14 @@ list_t parse() {
         append_l(stmts, stmt());
     }
     return stmts;
-}
+} 
 
 expr_t stmt() {
     TRACE("stmt");
+    if (peek() == SYMBOL + ';') {
+        eat_err(SYMBOL + ';');
+        return NULL;
+    }
     expr_t e = expr(-1);
     if (semicolon)
         eat_err(SYMBOL + ';');
@@ -109,7 +113,12 @@ expr_t l_expr() {
             append_l(ret->list, args);
             append_l(ret->list, eat(ID));
             eat_err(SYMBOL + '(');
-            do {append_l(args, eat_err(ID));} while (eat(SYMBOL + ','));
+            while (peek() != SYMBOL + ')') {
+                append_l(args, eat_err(ID));
+                if (peek() != SYMBOL + ')') {
+                    eat_err(SYMBOL + ',');
+                }
+            }
             eat_err(SYMBOL + ')');
             if (peek() == SYMBOL + ':') {
                 eat_err(SYMBOL + ':');
@@ -133,11 +142,9 @@ expr_t l_expr() {
                 expr_t val = expr(-1);
                 ret->type = LET_VALUE;
                 append_l(ret->list, val);
-                semicolon = 1;
-            } else {
+            } else
                 ret->type = LET_STMT;
-                semicolon = 1;
-            }
+            semicolon = 1;
             break;
         case IF:
             ret = new_expr(2);
@@ -153,6 +160,20 @@ expr_t l_expr() {
             } else
                 ret->type = IF_EXPR;
             break;
+        case WHILE:
+            ret = new_expr(2);
+            append_l(ret->list, expr(-1)); // cond
+            append_l(ret->list, expr(-1)); // body
+            ret->type = WHILE_LOOP;
+            break;
+        case DO:
+            ret = new_expr(2);
+            append_l(ret->list, expr(-1)); // body
+            eat_err(WHILE);
+            append_l(ret->list, expr(-1)); // cond
+            ret->type = DO_WHILE;
+            semicolon = 1;
+            break;
         case SYMBOL + '{':
             ret = new_expr(3);
             ret->type = BLOCK;
@@ -164,6 +185,13 @@ expr_t l_expr() {
         case SYMBOL + '(':
             ret = expr(-1);
             eat_err(SYMBOL + ')');
+            semicolon = 1;
+            break;
+        case LKW:
+            ret = new_expr(2);
+            ret->type = LKW_EXPR;
+            append_l(ret->list, e);
+            append_l(ret->list, expr(-1));
             break;
         case ID:
             ret = new_expr(1);

@@ -45,7 +45,16 @@ void append_l(list_t list, void* data) {
         list->data = data;
     }
 }
+void* indexl(list_t l, int i) {
+    return l->data[i];
+}
+
 // token
+char* data(token_t* t) {
+    if (t == NULL)
+        return NULL;
+    return t->data->data;
+}
 int priority(int type, int b) {
     if (type < SYMBOL)
         return 0;

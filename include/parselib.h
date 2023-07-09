@@ -1,19 +1,15 @@
 #ifndef PARSELIB_H
 #define PARSELIB_H
 #include "parser.h"
-#define FUNC     6  /* is_kw("func");   */
-#define IMPORT   7  /* is_kw("import"); */
-#define IF       8  /* is_kw("if");     */
-#define ELSE     9  /* is_kw("else");   */
-#define DO       10 /* is_kw("do");     */
-#define WHILE    11 /* is_kw("while");  */
-#define FOR      12 /* is_kw("for");    */
-#define IN       13 /* is_kw("in");     */
-#define TRY      14 /* is_kw("try");    */
-#define CATCH    15 /* is_kw("catch");  */
-#define FINALLY  16 /* is_kw("finally");*/
-#define CLASS    17 /* is_kw("class");  */
-#define LET      18 /* is_kw("let");    */
+#define FUNC   6  /* is_kw("func");   */
+#define IMPORT 7  /* is_kw("import"); */
+#define IF     8  /* is_kw("if");     */
+#define ELSE   9  /* is_kw("else");   */
+#define DO     10 /* is_kw("do");     */
+#define WHILE  11 /* is_kw("while");  */
+#define FOR    12 /* is_kw("for");    */
+#define TYPE   13 /* is_kw("type");   */
+#define LET    14 /* is_kw("let");    */
 
 extern int semicolon;
 expr_t expr();

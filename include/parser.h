@@ -7,16 +7,17 @@
 #define WHILE_LOOP 4
 #define DO_WHILE   5
 #define FOR_LOOP   6
-#define FUNC_DEF   7 //
-#define FUNC_CALL  8 //
-#define ID_EXPR    9 //
-#define STR_LIT    10 //
-#define INT_LIT    11 //
-#define BLOCK      12 //
+#define FUNC_DEF   7
+#define FUNC_CALL  8
+#define ID_EXPR    9
+#define STR_LIT    10
+#define INT_LIT    11
+#define BLOCK      12
 #define OP_EXPR    13
-#define LET_STMT   14 //
-#define LET_VALUE  15 //
+#define LET_STMT   14
+#define LET_VALUE  15
 #define ATTRIBUTE  16
+#define LKW_EXPR   17
 
 #define OP_DOUBLE  1
 #define OP_EQUALS  2
@@ -43,9 +44,10 @@ typedef struct _type {
     int params;
 } *type_t;
 
-void init(token_t* first);
+void parse_init(token_t* first);
 list_t parse();
 void append_l(list_t list, void* data);
 list_t new_list(int size, int incr);
+void* indexl(list_t l, int i);
 
 #endif

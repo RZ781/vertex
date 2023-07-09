@@ -24,7 +24,7 @@ void* try_fail(char* file, int line, void* x, int code, char* msg, ...) {
     return x;
 }
 
-void init(token_t* first) {
+void parse_init(token_t* first) {
     state = first;
     semicolon = 1;
 }

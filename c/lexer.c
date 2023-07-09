@@ -14,12 +14,12 @@ token_t* new_token(int pos, int line) {
 }
 
 // check keywords
-char *kws[13] = {"func", "import", "if", "else", "do", "while", "for", "in", "try", "catch", "finally", "class", "let"};
+char *kws[9] = {"func", "import", "if", "else", "do", "while", "for", "type", "let"};
 char *lkws[6] = {"raise", "return", "yield", "await", "break", "continue"};
 char *typenames[] = {"eof", "str", "int", "float", "id", "lkw"};
 
 int is_kw(char* s) {
-    for (int i=0; i<13; i++)
+    for (int i=0; i<9; i++)
         if (strcmp(kws[i], s) == 0) {
             return i+KW;
         }
@@ -46,7 +46,7 @@ char* typestr(int type) {
     return typenames[type];
 }
 
-token_t* lex() {
+token_t* lex(FILE* file) {
     int state = START;
     int line = 0;
     int pos = 0;
@@ -55,9 +55,9 @@ token_t* lex() {
     token_t* token = NULL;
     token_t* start = NULL;
     token_t* temp;
-    while (!feof(stdin)) {
+    while (!feof(file)) {
         if (esc != NO_READ)
-            c = getchar();
+            c = fgetc(file);
         else
             esc = 0;
         if (c == EOF)

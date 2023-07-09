@@ -5,9 +5,8 @@
 #define UNCLOSED_STR      2
 #define UNEXPECTED_EOF    3
 #define UNEXPECTED_TOKEN  4
-#define UNDEFINED_VAR     5
-#define NOT_CALLABLE      6
-#define ARGUMENT_MISMATCH 7
+#define NOT_IMPLEMENTED   5
+#define DEFINITION_REQ    6
 
 #ifdef DEBUG_MODE
 extern token_t* state;

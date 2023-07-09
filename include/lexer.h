@@ -45,6 +45,7 @@ typedef struct _token {
 
 str new_str();
 void append(str s, char c);
+char* data(token_t* t);
 char* typestr(int type);
 int is_lkw(char* s);
 int is_kw(char* s);
